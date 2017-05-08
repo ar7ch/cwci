@@ -35,7 +35,7 @@ void initialize_parameters(int *argc, char **argv[])
       case 'b':
         bytes_opt_selected = true;
         break;
-      case 'L'
+      case 'L':
         max_line_len_selected = true;
         break;
       case 'i':

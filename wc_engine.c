@@ -107,6 +107,6 @@ void wc_engine(int argc, char *argv[])
   }
 if(!standard_input_selected)
   fclose(file_to_read);
-else
-  free(str_to_read);
+//else
+  //free(str_to_read);
 }
