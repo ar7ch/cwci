@@ -26,7 +26,7 @@ along with Cwci.  If not, see <http://www.gnu.org/licenses/>.*/
 void initialize_parameters(int *argc, char **argv[])
 {
   char ch;
-  while((ch = getopt(*argc, *argv, "wbcsdnhtlg")) != EOF)
+  while((ch = getopt(*argc, *argv, "wbcsidnhtlgL")) != EOF)
   {
     switch(ch){
       case 'w':
@@ -34,6 +34,12 @@ void initialize_parameters(int *argc, char **argv[])
         break;
       case 'b':
         bytes_opt_selected = true;
+        break;
+      case 'L'
+        max_line_len_selected = true;
+        break;
+      case 'i':
+        standard_input_selected = true;
         break;
       case 'c':
         chars_opt_selected = true;
@@ -88,9 +94,9 @@ void initialize_parameters(int *argc, char **argv[])
         exit(0);
       }
       if(english_selected)
-        fprintf(stderr,"%s: expected filename or full path to file\n«%s -h» for help\n", EXEC_NAME, EXEC_NAME);
+        fprintf(stderr,"%s: expected filename, quoutes-delimited character sequence or full path to file\n«%s -h» for help\n", EXEC_NAME, EXEC_NAME);
       else
-        fprintf(stderr,"%s: ожидалось имя файла или полный путь до файла\n«%s -h» для вывода справки\n", EXEC_NAME, EXEC_NAME);
+        fprintf(stderr,"%s: ожидалось имя файла, последовательность символов в кавычках или полный путь до файла\n«%s -h» для вывода справки\n", EXEC_NAME, EXEC_NAME);
       exit(3);
     }
 }

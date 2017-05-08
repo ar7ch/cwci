@@ -31,15 +31,15 @@ void wc_engine(int argc, char *argv[])
   bool number_flag = false;
   int word_len_counter = 0;
   int ch;
-  FILE *file_to_read;
-  if(!(file_to_read = fopen(argv[0], "r")))
-  {
-    if(english_selected)
-      fprintf(stderr, "%s: no such file \"%s\"\n", EXEC_NAME, argv[0]);
-    else
-      fprintf(stderr, "%s: нет такого файла \"%s\"\n", EXEC_NAME, argv[0]);
-    exit(3);
-  }
+    FILE *file_to_read;
+    if(!(file_to_read = fopen(argv[0], "r")))
+    {
+      if(english_selected)
+        fprintf(stderr, "%s: no such file \"%s\"\n", EXEC_NAME, argv[0]);
+        else
+        fprintf(stderr, "%s: нет такого файла \"%s\"\n", EXEC_NAME, argv[0]);
+        exit(3);
+    }
   /*for(int i = 0; i < argc; i++){
     char ch[] = argv[i];
     for(int j = 0; ch[j] != '\0'; i++)  }*/
@@ -90,8 +90,6 @@ void wc_engine(int argc, char *argv[])
         else
           bytes_counter += sizeof(char);
       }
-
-
     if(chars_opt_selected)
       chars_counter++;
     if(spaces_opt_selected)
@@ -106,5 +104,9 @@ void wc_engine(int argc, char *argv[])
       if(current_char == '\n')
         lines_counter++;
     }
-}
+  }
+if(!standard_input_selected)
+  fclose(file_to_read);
+else
+  free(str_to_read);
 }
