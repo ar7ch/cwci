@@ -11,14 +11,14 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with Cwci.  If not, see <http://www.gnu.org/licenses/>.*/
+along with cwci.  If not, see <http://www.gnu.org/licenses/>.*/
 
 typedef int bool;
 #define true 1
 #define false 0
 
-extern unsigned long words_counter, bytes_counter, chars_counter, spaces_counter, letters_counter, number_counter, digit_counter, lines_counter, max_word_length;
-extern bool max_line_len_selected, standard_input_selected, english_selected, words_opt_selected, bytes_opt_selected, chars_opt_selected, spaces_opt_selected, letters_opt_selected, help_opt_selected, greeting_opt_selected, digit_opt_selected, number_opt_selected, lines_opt_selected;
+extern unsigned long words_counter, bytes_counter, chars_counter, spaces_counter, digit_counter, lines_counter, max_line_length;
+extern bool max_line_len_selected, standard_input_selected, english_selected, words_opt_selected, bytes_opt_selected, chars_opt_selected, spaces_opt_selected, help_opt_selected, greeting_opt_selected, digit_opt_selected, lines_opt_selected;
 extern const char * EXEC_NAME;
 
 
