@@ -14,14 +14,8 @@ You should have received a copy of the GNU General Public License
 along with Cwci.  If not, see <http://www.gnu.org/licenses/>.*/
 
 #include "libwc.h"
-#include <unistd.h>
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
-#include <wctype.h>
-#include <wchar.h>
-#include <locale.h>
+#include <unistd.h>
 
 void greeting()
 {

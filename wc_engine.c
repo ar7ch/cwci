@@ -23,23 +23,30 @@ along with Cwci.  If not, see <http://www.gnu.org/licenses/>.*/
 #include <wctype.h>
 #include <wchar.h>
 #include <locale.h>
+#include <sys/stat.h>
 
 void wc_engine(int argc, char *argv[])
 {
-  wchar_t current_char;
+  char current_char;
   bool word_flag = false;
-  bool number_flag = false;
   int word_len_counter = 0;
+  int line_len_counter = 0;
   int ch;
     FILE *file_to_read;
     if(!(file_to_read = fopen(argv[0], "r")))
     {
       if(english_selected)
         fprintf(stderr, "%s: no such file \"%s\"\n", EXEC_NAME, argv[0]);
-        else
+      else
         fprintf(stderr, "%s: нет такого файла \"%s\"\n", EXEC_NAME, argv[0]);
-        exit(3);
+      exit(3);
     }
+  if(bytes_opt_selected)
+  {
+    struct stat buff;
+    stat(argv[0], &buff);
+    bytes_counter = buff.st_size;
+  }
   /*for(int i = 0; i < argc; i++){
     char ch[] = argv[i];
     for(int j = 0; ch[j] != '\0'; i++)  }*/
@@ -47,66 +54,61 @@ void wc_engine(int argc, char *argv[])
     greeting();
   if(help_opt_selected)
     print_help();
-  while((ch = fgetwc(file_to_read)) != EOF)
+  while((ch = fgetc(file_to_read)) != EOF)
   {
     current_char = ch;
-    if(iswalpha(current_char) && (letters_opt_selected || words_opt_selected))
+
+    if(!word_flag && words_opt_selected)
     {
-      if(letters_opt_selected)
-        letters_counter++;
-      if(words_opt_selected)
-      {
-        word_flag = true;
+      word_flag = true;
+      if(current_char != ' ')
         word_len_counter++;
-      }
     }
-    if(words_opt_selected && word_flag && !iswalpha(current_char))
+    else if(word_flag && current_char != ' ' && current_char != '\n' && current_char != '\t' && words_opt_selected)
+    {
+      word_len_counter++;
+    }
+    if(word_flag && current_char == ' ' && words_opt_selected && word_len_counter == 0) //exception for several spaces in a row
+    {
+      word_flag = false;
+      word_len_counter = 0;
+    }
+    if(word_flag && (current_char == ' ' || current_char == '\n' || current_char == '\t') && words_opt_selected)
     {
       words_counter++;
       word_flag = false;
-      if(word_len_counter > max_word_length)
-        max_word_length = word_len_counter;
       word_len_counter = 0;
     }
 
-    if(iswdigit(current_char) && (digit_opt_selected || number_opt_selected))
+    if(isdigit(current_char) && digit_opt_selected)
     {
-      if(digit_opt_selected)
         digit_counter++;
-      if(number_opt_selected)
-      {
-        number_flag = true;
-      }
     }
-    if(number_opt_selected && number_flag && !iswdigit(current_char))
-    {
-      number_counter++;
-      number_flag = false;
-    }
-    if(bytes_opt_selected)
-      {
-        if(ch > 127 || ch < -128)
-          bytes_counter += sizeof(wchar_t) / 2; //looks like size is calculated like this
-        else
-          bytes_counter += sizeof(char);
-      }
     if(chars_opt_selected)
+    {
       chars_counter++;
-    if(spaces_opt_selected)
-    {
-      if(current_char == ' ')
-      {
-        spaces_counter++;
-      }
     }
-    if(lines_opt_selected)
+    if(max_line_len_selected)
     {
-      if(current_char == '\n')
-        lines_counter++;
+      line_len_counter++;
+    }
+    if(spaces_opt_selected && current_char == ' ')
+    {
+        spaces_counter++;
+    }
+    if(lines_opt_selected && current_char == '\n')
+    {
+      lines_counter++;
+      if(max_line_len_selected)
+      {
+        if(max_line_length < line_len_counter)
+          max_line_length = line_len_counter;
+        line_len_counter = 0;
+      }
     }
   }
-if(!standard_input_selected)
-  fclose(file_to_read);
+  if(!standard_input_selected)
+    fclose(file_to_read);
 //else
   //free(str_to_read);
 }

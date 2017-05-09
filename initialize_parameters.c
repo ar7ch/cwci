@@ -17,16 +17,12 @@ along with Cwci.  If not, see <http://www.gnu.org/licenses/>.*/
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
-#include <wctype.h>
-#include <wchar.h>
 #include <locale.h>
 
 void initialize_parameters(int *argc, char **argv[])
 {
   char ch;
-  while((ch = getopt(*argc, *argv, "wbcsidnhtlgL")) != EOF)
+  while((ch = getopt(*argc, *argv, "wbcsidhlgL")) != EOF)
   {
     switch(ch){
       case 'w':
@@ -50,14 +46,8 @@ void initialize_parameters(int *argc, char **argv[])
       case 'd':
         digit_opt_selected = true;
         break;
-      case 'n':
-        number_opt_selected = true;
-        break;
       case 'h':
         help_opt_selected = true;
-        break;
-      case 't':
-        letters_opt_selected = true;
         break;
       case 'l':
         lines_opt_selected = true;

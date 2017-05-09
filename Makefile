@@ -10,7 +10,7 @@
 #GNU General Public License for more details.
 #
 #You should have received a copy of the GNU General Public License
-#along with Cwci.  If not, see <http://www.gnu.org/licenses/>.
+#along with cwci.  If not, see <http://www.gnu.org/licenses/>.
 
 greeting.o: greeting.c libwc.h
 	gcc -c greeting.c
