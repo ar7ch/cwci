@@ -32,4 +32,4 @@ bool help_opt_selected = false;
 bool greeting_opt_selected = false;
 bool digit_opt_selected = false;
 bool lines_opt_selected = false;
-bool standard_input_selected = true;
+bool standard_input_selected = false;

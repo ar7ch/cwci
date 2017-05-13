@@ -33,6 +33,8 @@ void wc_engine(int argc, char *argv[])
   int line_len_counter = 0;
   int ch;
     FILE *file_to_read;
+    if(!standard_input_selected)
+    {
     if(!(file_to_read = fopen(argv[0], "r")))
     {
       if(english_selected)
@@ -41,12 +43,15 @@ void wc_engine(int argc, char *argv[])
         fprintf(stderr, "%s: нет такого файла \"%s\"\n", EXEC_NAME, argv[0]);
       exit(3);
     }
-  if(bytes_opt_selected)
+    }
+  //printf("%d\n", standard_input_selected);
+  if(bytes_opt_selected && !standard_input_selected)
   {
     struct stat buff;
     stat(argv[0], &buff);
     bytes_counter = buff.st_size;
   }
+  
   /*for(int i = 0; i < argc; i++){
     char ch[] = argv[i];
     for(int j = 0; ch[j] != '\0'; i++)  }*/
@@ -54,6 +59,8 @@ void wc_engine(int argc, char *argv[])
     greeting();
   if(help_opt_selected)
     print_help();
+  if(!standard_input_selected)
+  {
   while((ch = fgetc(file_to_read)) != EOF)
   {
     current_char = ch;
@@ -107,8 +114,66 @@ void wc_engine(int argc, char *argv[])
       }
     }
   }
+  }
+  else
+  {
+    char * str_to_read = malloc(sizeof(char) * (strlen(argv[0])+1));
+    strcpy(str_to_read, argv[0]);
+    for(int i = 0; i < strlen(str_to_read)+1; i++)
+    {
+      bytes_counter++;
+      current_char = str_to_read[i];
+    if(!word_flag && words_opt_selected)
+    {
+      word_flag = true;
+      if(current_char != ' ')
+        word_len_counter++;
+    }
+    else if(word_flag && current_char != ' ' && current_char != '\n' && current_char != '\t' && words_opt_selected)
+    {
+      word_len_counter++;
+    }
+    if(word_flag && current_char == ' ' && words_opt_selected && word_len_counter == 0) //exception for several spaces in a row
+    {
+      word_flag = false;
+      word_len_counter = 0;
+    }
+    if(word_flag && (current_char == ' ' || current_char == '\n' || current_char == '\t' || current_char == '\0') && words_opt_selected)
+    {
+      words_counter++;
+      word_flag = false;
+      word_len_counter = 0;
+    }
+
+    if(isdigit(current_char) && digit_opt_selected)
+    {
+        digit_counter++;
+    }
+    if(chars_opt_selected)
+    {
+      chars_counter++;
+    }
+    if(max_line_len_selected)
+    {
+      line_len_counter++;
+    }
+    if(spaces_opt_selected && current_char == ' ')
+    {
+        spaces_counter++;
+    }
+    if(lines_opt_selected && current_char == '\n')
+    {
+      lines_counter++;
+      if(max_line_len_selected)
+      {
+        if(max_line_length < line_len_counter)
+          max_line_length = line_len_counter;
+        line_len_counter = 0;
+      }
+    }
+    }
+    free(str_to_read);
+  }
   if(!standard_input_selected)
     fclose(file_to_read);
-//else
-  //free(str_to_read);
 }

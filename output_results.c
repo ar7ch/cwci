@@ -31,7 +31,7 @@ void output_results(char *argc[])
     if(spaces_opt_selected)
       printf("Spaces: %d\n", spaces_counter);
     if(chars_opt_selected)
-      printf("[all visible]Chars: %d\n", chars_counter > 0 ? chars_counter - 1 : chars_counter);
+      printf("Characters: %d\n", chars_counter);
     if(digit_opt_selected)
       printf("Digits: %d\n", digit_counter);
     if(words_opt_selected)
@@ -51,7 +51,7 @@ void output_results(char *argc[])
     if(spaces_opt_selected)
       printf("Пробелов: %d\n", spaces_counter);
     if(chars_opt_selected)
-      printf("[всех видимых]Символов: %d\n", chars_counter > 0 ? chars_counter - 1 : chars_counter);
+      printf("Символов: %d\n", chars_counter);
     if(digit_opt_selected)
       printf("Цифр: %d\n", digit_counter);
     if(words_opt_selected)

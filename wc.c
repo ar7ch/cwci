@@ -28,5 +28,6 @@ int main(int argc, char *argv[])
   initialize_parameters(&argc, &argv);
   wc_engine(argc, argv);
   output_results(argv);
+  //remove("temp.txt");
   return 0;
 }
