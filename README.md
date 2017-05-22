@@ -1,1 +1,1 @@
-cwci - a C wc implementation
+cwci - a simple wc implementation written in C
