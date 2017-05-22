@@ -13,16 +13,46 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with cwci.  If not, see <http://www.gnu.org/licenses/>.*/
 
-typedef int bool;
+typedef unsigned int bool;
+typedef unsigned long u_long;
+
 #define true 1
 #define false 0
 
-extern unsigned long words_counter, bytes_counter, chars_counter, spaces_counter, digit_counter, lines_counter, max_line_length;
-extern bool max_line_len_selected, standard_input_selected, english_selected, words_opt_selected, bytes_opt_selected, chars_opt_selected, spaces_opt_selected, help_opt_selected, greeting_opt_selected, digit_opt_selected, lines_opt_selected;
+//extern unsigned long words_counter, bytes_counter, chars_counter, spaces_counter, digit_counter, lines_counter, max_line_length;
+//extern bool max_line_len_selected, standard_input_selected, english_selected, words_opt_selected, bytes_opt_selected, chars_opt_selected, spaces_opt_selected, help_opt_selected, greeting_opt_selected, digit_opt_selected, lines_opt_selected;
 extern const char * EXEC_NAME;
 
+typedef struct
+{
+	 u_long words_counter;
+	 u_long bytes_counter; 
+	 u_long chars_counter; 
+	 u_long spaces_counter;
+	 u_long digit_counter;
+	 u_long lines_counter;
+	 u_long max_line_length;
+} wc_counters;
 
+typedef struct
+{
+	bool max_line_len_selected:1;
+	bool standard_input_selected:1;
+	bool english_selected:1;
+	bool words_opt_selected:1;
+	bool bytes_opt_selected:1;
+	bool chars_opt_selected:1;
+	bool spaces_opt_selected:1;
+	bool help_opt_selected:1; 
+	bool greeting_opt_selected:1;
+	bool digit_opt_selected:1;
+	bool lines_opt_selected:1;
+} wc_opts_selected;
+
+extern wc_opts_selected  * opts_selected;
+extern wc_counters * counters;
 void greeting();
+void initialize_structs();
 void initialize_parameters(int *argc, char **argv[]);
 void wc_engine(int argc, char *argv[]);
 void initialize_global_variables();

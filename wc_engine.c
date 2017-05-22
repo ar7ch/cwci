@@ -14,7 +14,6 @@ You should have received a copy of the GNU General Public License
 along with Cwci.  If not, see <http://www.gnu.org/licenses/>.*/
 
 #include "libwc.h"
-#include "libwc.h"
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -33,11 +32,11 @@ void wc_engine(int argc, char *argv[])
   int line_len_counter = 0;
   int ch;
     FILE *file_to_read;
-    if(!standard_input_selected)
+    if(!opts_selected->standard_input_selected)
     {
     if(!(file_to_read = fopen(argv[0], "r")))
     {
-      if(english_selected)
+      if(opts_selected->english_selected)
         fprintf(stderr, "%s: no such file \"%s\"\n", EXEC_NAME, argv[0]);
       else
         fprintf(stderr, "%s: нет такого файла \"%s\"\n", EXEC_NAME, argv[0]);
@@ -45,71 +44,71 @@ void wc_engine(int argc, char *argv[])
     }
     }
   //printf("%d\n", standard_input_selected);
-  if(bytes_opt_selected && !standard_input_selected)
+  if(opts_selected->bytes_opt_selected && !opts_selected->standard_input_selected)
   {
     struct stat buff;
     stat(argv[0], &buff);
-    bytes_counter = buff.st_size;
+    counters->bytes_counter = buff.st_size;
   }
   
   /*for(int i = 0; i < argc; i++){
     char ch[] = argv[i];
     for(int j = 0; ch[j] != '\0'; i++)  }*/
-  if(greeting_opt_selected)
+  if(opts_selected->greeting_opt_selected)
     greeting();
-  if(help_opt_selected)
+  if(opts_selected->help_opt_selected)
     print_help();
-  if(!standard_input_selected)
+  if(!opts_selected->standard_input_selected)
   {
   while((ch = fgetc(file_to_read)) != EOF)
   {
     current_char = ch;
 
-    if(!word_flag && words_opt_selected)
+    if(!word_flag && opts_selected->words_opt_selected)
     {
       word_flag = true;
       if(current_char != ' ')
         word_len_counter++;
     }
-    else if(word_flag && current_char != ' ' && current_char != '\n' && current_char != '\t' && words_opt_selected)
+    else if(word_flag && current_char != ' ' && current_char != '\n' && current_char != '\t' && opts_selected->words_opt_selected)
     {
       word_len_counter++;
     }
-    if(word_flag && current_char == ' ' && words_opt_selected && word_len_counter == 0) //exception for several spaces in a row
+    if(word_flag && current_char == ' ' && opts_selected->words_opt_selected && word_len_counter == 0) //exception for several spaces in a row
     {
       word_flag = false;
       word_len_counter = 0;
     }
-    if(word_flag && (current_char == ' ' || current_char == '\n' || current_char == '\t') && words_opt_selected)
+    if(word_flag && (current_char == ' ' || current_char == '\n' || current_char == '\t') && opts_selected->words_opt_selected)
     {
-      words_counter++;
+      counters->words_counter++;
       word_flag = false;
       word_len_counter = 0;
     }
 
-    if(isdigit(current_char) && digit_opt_selected)
+    if(isdigit(current_char) && opts_selected->digit_opt_selected)
     {
-        digit_counter++;
+      counters->digit_counter++;
     }
-    if(chars_opt_selected)
+    if(opts_selected->chars_opt_selected)
     {
-      chars_counter++;
+      counters->chars_counter++;
     }
-    if(max_line_len_selected)
+    if(opts_selected->max_line_len_selected)
     {
       line_len_counter++;
     }
-    if(spaces_opt_selected && current_char == ' ')
+    if(opts_selected->spaces_opt_selected && current_char == ' ')
     {
-        spaces_counter++;
+      counters->spaces_counter++;
     }
-    if(lines_opt_selected && current_char == '\n')
+    if(opts_selected->lines_opt_selected && current_char == '\n')
     {
-      lines_counter++;
-      if(max_line_len_selected)
+      counters->lines_counter++;
+      if(opts_selected->max_line_len_selected)
       {
-        if(max_line_length < line_len_counter)
-          max_line_length = line_len_counter;
+        if(counters->max_line_length < line_len_counter)
+          counters->max_line_length = line_len_counter;
         line_len_counter = 0;
       }
     }
@@ -121,59 +120,59 @@ void wc_engine(int argc, char *argv[])
     strcpy(str_to_read, argv[0]);
     for(int i = 0; i < strlen(str_to_read)+1; i++)
     {
-      bytes_counter++;
+      counters->bytes_counter++;
       current_char = str_to_read[i];
-    if(!word_flag && words_opt_selected)
+    if(!word_flag && opts_selected->words_opt_selected)
     {
       word_flag = true;
       if(current_char != ' ')
         word_len_counter++;
     }
-    else if(word_flag && current_char != ' ' && current_char != '\n' && current_char != '\t' && words_opt_selected)
+    else if(word_flag && current_char != ' ' && current_char != '\n' && current_char != '\t' && opts_selected->words_opt_selected)
     {
       word_len_counter++;
     }
-    if(word_flag && current_char == ' ' && words_opt_selected && word_len_counter == 0) //exception for several spaces in a row
+    if(word_flag && current_char == ' ' && opts_selected->words_opt_selected && word_len_counter == 0) //exception for several spaces in a row
     {
       word_flag = false;
       word_len_counter = 0;
     }
-    if(word_flag && (current_char == ' ' || current_char == '\n' || current_char == '\t' || current_char == '\0') && words_opt_selected)
+    if(word_flag && (current_char == ' ' || current_char == '\n' || current_char == '\t' || current_char == '\0') && opts_selected->words_opt_selected)
     {
-      words_counter++;
+      counters->words_counter++;
       word_flag = false;
       word_len_counter = 0;
     }
 
-    if(isdigit(current_char) && digit_opt_selected)
+    if(isdigit(current_char) && opts_selected->digit_opt_selected)
     {
-        digit_counter++;
+      counters->digit_counter++;
     }
-    if(chars_opt_selected)
+    if(opts_selected->chars_opt_selected)
     {
-      chars_counter++;
+      counters->chars_counter++;
     }
-    if(max_line_len_selected)
+    if(opts_selected->max_line_len_selected)
     {
       line_len_counter++;
     }
-    if(spaces_opt_selected && current_char == ' ')
+    if(opts_selected->spaces_opt_selected && current_char == ' ')
     {
-        spaces_counter++;
+      counters->spaces_counter++;
     }
-    if(lines_opt_selected && current_char == '\n')
+    if(opts_selected->lines_opt_selected && current_char == '\n')
     {
-      lines_counter++;
-      if(max_line_len_selected)
+      counters->lines_counter++;
+      if(opts_selected->max_line_len_selected)
       {
-        if(max_line_length < line_len_counter)
-          max_line_length = line_len_counter;
+        if(counters->max_line_length < line_len_counter)
+          counters->max_line_length = line_len_counter;
         line_len_counter = 0;
       }
     }
     }
     free(str_to_read);
   }
-  if(!standard_input_selected)
+  if(!opts_selected->standard_input_selected)
     fclose(file_to_read);
 }

@@ -18,7 +18,7 @@ along with Cwci.  If not, see <http://www.gnu.org/licenses/>.*/
 
 void print_help()
 {
-  if(english_selected)
+  if(opts_selected->english_selected)
   {
     printf("cwci - a C wc implementation v. 0.2\n\nSynopsis: %s [OPTIONS] [FILE]\n\nprint word, byte, character, space, digit, newline counts for file\n", EXEC_NAME);
     printf("A word is a non-zero-length sequence of characters delimited by white space.\nReading from standard input is under development\n\nOptions:\n\n-w\n\tprint the word counts\n\n-b\n\tprint the byte counts\n\n-c\n\tprint the character counts\n\n-s\n\tprint the space counts\n\n-d\n\tprint the digit counts\n\n-h\n\tprint this help and exit\n\n-l\n\tprint the newline count\n\n-L\n\tprint max line length\n\n-g\n\tprint greeting for user\n\n author\n\twritten by Artyom Bulgakov <https://github.com/blgkv>\n\nPart of this help was taken from official wc man page. Copyright © 2017 Free Software Foundation, Inc.\nThanks to Paul Rubin, David MacKenzie and to all Coreutils developers.\n\n");

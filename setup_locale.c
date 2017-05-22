@@ -28,9 +28,9 @@ void setup_locale()
   locale[0] = tolower(locale[0]);
   locale[1] = tolower(locale[1]);
   if(!strcmp(locale, "ru"))
-    english_selected = false;
+    opts_selected->english_selected = false;
   else if(!strcmp(locale, "en"))
-    english_selected = true;
+    opts_selected->english_selected = true;
   else
     goto select;
 }

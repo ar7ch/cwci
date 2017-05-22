@@ -26,37 +26,37 @@ void initialize_parameters(int *argc, char **argv[])
   {
     switch(ch){
       case 'w':
-        words_opt_selected = true;
+        opts_selected->words_opt_selected = true;
         break;
       case 'b':
-        bytes_opt_selected = true;
+        opts_selected->bytes_opt_selected = true;
         break;
       case 'L':
-        max_line_len_selected = true;
+        opts_selected->max_line_len_selected = true;
         break;
       case 'i':
-        standard_input_selected = true;
+        opts_selected->standard_input_selected = true;
         break;
       case 'c':
-        chars_opt_selected = true;
+        opts_selected->chars_opt_selected = true;
         break;
       case 's':
-        spaces_opt_selected = true;
+        opts_selected->spaces_opt_selected = true;
         break;
       case 'd':
-        digit_opt_selected = true;
+        opts_selected->digit_opt_selected = true;
         break;
       case 'h':
-        help_opt_selected = true;
+        opts_selected->help_opt_selected = true;
         break;
       case 'l':
-        lines_opt_selected = true;
+        opts_selected->lines_opt_selected = true;
         break;
       case 'g':
-        greeting_opt_selected = true;
+        opts_selected->greeting_opt_selected = true;
         break;
       default:
-        if(english_selected)
+        if(opts_selected->english_selected)
           fprintf(stderr, "«%s -h» for help\n", EXEC_NAME);
         else
           fprintf(stderr, "«%s -h» для вывода справки\n", EXEC_NAME);
@@ -70,7 +70,7 @@ void initialize_parameters(int *argc, char **argv[])
       //help_opt_selected = true;
     if(*argc == 1 && optind == 1)
     {
-      if(english_selected)
+      if(opts_selected->english_selected)
         fprintf(stderr, "%s: expected options\n«%s -h» for help\n", EXEC_NAME, EXEC_NAME);
       else
         fprintf(stderr, "%s: на вход ожидались аргументы\n«%s -h» для вывода справки\n", EXEC_NAME, EXEC_NAME);
@@ -78,12 +78,12 @@ void initialize_parameters(int *argc, char **argv[])
     }
     if(*argc == 0)
     {
-      if(help_opt_selected)
+      if(opts_selected->help_opt_selected)
       {
         print_help();
         exit(0);
       }
-      if(english_selected)
+      if(opts_selected->english_selected)
         fprintf(stderr,"%s: expected filename, quoutes-delimited character sequence or full path to file\n«%s -h» for help\n", EXEC_NAME, EXEC_NAME);
       else
         fprintf(stderr,"%s: ожидалось имя файла, последовательность символов в кавычках или полный путь до файла\n«%s -h» для вывода справки\n", EXEC_NAME, EXEC_NAME);

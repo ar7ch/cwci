@@ -19,44 +19,44 @@ along with cwci.  If not, see <http://www.gnu.org/licenses/>.*/
 
 void output_results(char *argc[])
 {
-  if(english_selected)
+  if(opts_selected->english_selected)
   {
     printf("Successfully parsed file %s\n\n", argc[0]);
-    if(bytes_opt_selected)
-      printf("Bytes: %d\n", bytes_counter);
-    if(lines_opt_selected)
-      printf("Lines: %d\n", lines_counter);
-    if(max_line_len_selected)
-      printf("Maximum line length: %d\n", max_line_length);
-    if(spaces_opt_selected)
-      printf("Spaces: %d\n", spaces_counter);
-    if(chars_opt_selected)
-      printf("Characters: %d\n", chars_counter);
-    if(digit_opt_selected)
-      printf("Digits: %d\n", digit_counter);
-    if(words_opt_selected)
+    if(opts_selected->bytes_opt_selected)
+      printf("Bytes: %d\n", counters->bytes_counter);
+    if(opts_selected->lines_opt_selected)
+      printf("Lines: %d\n", counters->lines_counter);
+    if(opts_selected->max_line_len_selected)
+      printf("Maximum line length: %d\n", counters->max_line_length);
+    if(opts_selected->spaces_opt_selected)
+      printf("Spaces: %d\n", counters->spaces_counter);
+    if(opts_selected->chars_opt_selected)
+      printf("Characters: %d\n", counters->chars_counter);
+    if(opts_selected->digit_opt_selected)
+      printf("Digits: %d\n", counters->digit_counter);
+    if(opts_selected->words_opt_selected)
     {
-      printf("Words: %d\n", words_counter);
+      printf("Words: %d\n", counters->words_counter);
     }
   }
   else
   {
     printf("Файл %s успешно проанализирован\n\n", argc[0]);
-    if(bytes_opt_selected)
-      printf("Байтов: %d\n", bytes_counter);
-    if(lines_opt_selected)
-      printf("Строк: %d\n", lines_counter);
-    if(max_line_len_selected)
-      printf("Максимальная длина строки: %d\n", max_line_length);
-    if(spaces_opt_selected)
-      printf("Пробелов: %d\n", spaces_counter);
-    if(chars_opt_selected)
-      printf("Символов: %d\n", chars_counter);
-    if(digit_opt_selected)
-      printf("Цифр: %d\n", digit_counter);
-    if(words_opt_selected)
+    if(opts_selected->bytes_opt_selected)
+      printf("Байтов: %d\n", counters->bytes_counter);
+    if(opts_selected->lines_opt_selected)
+      printf("Строк: %d\n", counters->lines_counter);
+    if(opts_selected->max_line_len_selected)
+      printf("Максимальная длина строки: %d\n", counters->max_line_length);
+    if(opts_selected->spaces_opt_selected)
+      printf("Пробелов: %d\n", counters->spaces_counter);
+    if(opts_selected->chars_opt_selected)
+      printf("Символов: %d\n", counters->chars_counter);
+    if(opts_selected->digit_opt_selected)
+      printf("Цифр: %d\n", counters->digit_counter);
+    if(opts_selected->words_opt_selected)
     {
-      printf("Слов: %d\n", words_counter);
+      printf("Слов: %d\n", counters->words_counter);
     }
   }
 }

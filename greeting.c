@@ -16,10 +16,9 @@ along with Cwci.  If not, see <http://www.gnu.org/licenses/>.*/
 #include "libwc.h"
 #include <stdio.h>
 #include <unistd.h>
-
 void greeting()
 {
-  if(english_selected)
+  if(opts_selected->english_selected)
     printf("Hello, %s!\n", getlogin());
   else
     printf("Привет, %s!\n", getlogin());

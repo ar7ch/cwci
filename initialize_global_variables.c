@@ -14,22 +14,32 @@ You should have received a copy of the GNU General Public License
 along with Cwci.  If not, see <http://www.gnu.org/licenses/>.*/
 
 #include "libwc.h"
+#include <stdlib.h>
 
-unsigned long words_counter = 0;
-unsigned long bytes_counter = 0;
-unsigned long chars_counter = 0;
-unsigned long spaces_counter = 0;
-unsigned long digit_counter = 0;
-unsigned long lines_counter = 0;
-unsigned long max_line_length = 0;
-bool max_line_len_selected = false;
-bool english_selected = false;
-bool words_opt_selected = false;
-bool bytes_opt_selected = false;
-bool chars_opt_selected = false;
-bool spaces_opt_selected = false;
-bool help_opt_selected = false;
-bool greeting_opt_selected = false;
-bool digit_opt_selected = false;
-bool lines_opt_selected = false;
-bool standard_input_selected = false;
+wc_counters * counters;
+wc_opts_selected  * opts_selected;
+
+void initialize_structs()
+{
+opts_selected = malloc(sizeof(wc_counters));
+counters = malloc(sizeof(wc_counters));
+
+counters->words_counter = 0;
+counters->bytes_counter = 0;
+counters->chars_counter = 0;
+counters->spaces_counter = 0;
+counters->digit_counter = 0;
+counters->lines_counter = 0;
+counters->max_line_length = 0;
+opts_selected->max_line_len_selected = false;
+opts_selected->english_selected = false;
+opts_selected->words_opt_selected = false;
+opts_selected->bytes_opt_selected = false;
+opts_selected->chars_opt_selected = false;
+opts_selected->spaces_opt_selected = false;
+opts_selected->help_opt_selected = false;
+opts_selected->greeting_opt_selected = false;
+opts_selected->digit_opt_selected = false;
+opts_selected->lines_opt_selected = false;
+opts_selected->standard_input_selected = false;
+}
