@@ -19,17 +19,21 @@ along with cwci. If not, see <http://www.gnu.org/licenses/>.*/
 #include <locale.h>
 #include "libwc.h"
 
-
 const char * EXEC_NAME;
 int main(int argc, char *argv[])
 {
   setlocale(LC_ALL, "");
   EXEC_NAME = argv[0];
-  initialize_structs();
+  initialize_structs(1);
   setup_locale();
   initialize_parameters(&argc, &argv);
-  wc_engine(argc, argv);
-  output_results(argv);
-  //remove("temp.txt");
+  for(int i = 0; i < argc; i++)
+  {
+  wc_engine(argc, argv[i]);
+  output_results(argv[i]);
+  initialize_structs(0);
+  }
+  free(opts_selected);
+  free(counters);
   return 0;
 }

@@ -24,7 +24,7 @@ along with Cwci.  If not, see <http://www.gnu.org/licenses/>.*/
 #include <locale.h>
 #include <sys/stat.h>
 
-void wc_engine(int argc, char *argv[])
+void wc_engine(int argc, char *argv)
 {
   char current_char;
   bool word_flag = false;
@@ -34,12 +34,12 @@ void wc_engine(int argc, char *argv[])
     FILE *file_to_read;
     if(!opts_selected->standard_input_selected)
     {
-    if(!(file_to_read = fopen(argv[0], "r")))
+    if(!(file_to_read = fopen(argv, "r")))
     {
       if(opts_selected->english_selected)
-        fprintf(stderr, "%s: no such file \"%s\"\n", EXEC_NAME, argv[0]);
+        fprintf(stderr, "%s: no such file \"%s\"\n", EXEC_NAME, argv);
       else
-        fprintf(stderr, "%s: нет такого файла \"%s\"\n", EXEC_NAME, argv[0]);
+        fprintf(stderr, "%s: нет такого файла \"%s\"\n", EXEC_NAME, argv);
       exit(3);
     }
     }
@@ -47,7 +47,7 @@ void wc_engine(int argc, char *argv[])
   if(opts_selected->bytes_opt_selected && !opts_selected->standard_input_selected)
   {
     struct stat buff;
-    stat(argv[0], &buff);
+    stat(argv, &buff);
     counters->bytes_counter = buff.st_size;
   }
   
@@ -116,8 +116,8 @@ void wc_engine(int argc, char *argv[])
   }
   else
   {
-    char * str_to_read = malloc(sizeof(char) * (strlen(argv[0])+1));
-    strcpy(str_to_read, argv[0]);
+    char * str_to_read = malloc(sizeof(char) * (strlen(argv)+1));
+    strcpy(str_to_read, argv);
     for(int i = 0; i < strlen(str_to_read)+1; i++)
     {
       counters->bytes_counter++;

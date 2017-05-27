@@ -17,11 +17,14 @@ along with cwci.  If not, see <http://www.gnu.org/licenses/>.*/
 #include <stdio.h>
 #include <locale.h>
 
-void output_results(char *argc[])
+void output_results(char *argc)
 {
   if(opts_selected->english_selected)
   {
-    printf("Successfully parsed file %s\n\n", argc[0]);
+    if(!opts_selected->standard_input_selected)
+      printf("Successfully parsed file %s\n\n", argc);
+    else
+      printf("Successful\n\n");
     if(opts_selected->bytes_opt_selected)
       printf("Bytes: %d\n", counters->bytes_counter);
     if(opts_selected->lines_opt_selected)
@@ -38,10 +41,14 @@ void output_results(char *argc[])
     {
       printf("Words: %d\n", counters->words_counter);
     }
+    printf("\n");
   }
   else
   {
-    printf("Файл %s успешно проанализирован\n\n", argc[0]);
+    if(!opts_selected->standard_input_selected)
+      printf("Файл %s успешно проанализирован\n\n", argc);
+    else
+      printf("Успешно\n\n");
     if(opts_selected->bytes_opt_selected)
       printf("Байтов: %d\n", counters->bytes_counter);
     if(opts_selected->lines_opt_selected)
@@ -58,5 +65,6 @@ void output_results(char *argc[])
     {
       printf("Слов: %d\n", counters->words_counter);
     }
+    printf("\n");
   }
 }

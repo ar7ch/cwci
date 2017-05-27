@@ -16,6 +16,7 @@ along with Cwci.  If not, see <http://www.gnu.org/licenses/>.*/
 #include "libwc.h"
 #include <stdio.h>
 #include <unistd.h>
+
 void greeting()
 {
   if(opts_selected->english_selected)
