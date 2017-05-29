@@ -34,16 +34,15 @@ void wc_engine(int argc, char *argv)
     FILE *file_to_read;
     if(!opts_selected->standard_input_selected)
     {
-    if(!(file_to_read = fopen(argv, "r")))
-    {
-      if(opts_selected->english_selected)
-        fprintf(stderr, "%s: no such file \"%s\"\n", EXEC_NAME, argv);
-      else
-        fprintf(stderr, "%s: нет такого файла \"%s\"\n", EXEC_NAME, argv);
-      exit(3);
+      if(!(file_to_read = fopen(argv, "r")))
+      {
+        if(opts_selected->english_selected)
+          fprintf(stderr, "%s: no such file \"%s\"\n", EXEC_NAME, argv);
+        else
+          fprintf(stderr, "%s: нет такого файла \"%s\"\n", EXEC_NAME, argv);
+        exit(3);
+      }
     }
-    }
-  //printf("%d\n", standard_input_selected);
   if(opts_selected->bytes_opt_selected && !opts_selected->standard_input_selected)
   {
     struct stat buff;
@@ -120,8 +119,14 @@ void wc_engine(int argc, char *argv)
     strcpy(str_to_read, argv);
     for(int i = 0; i < strlen(str_to_read)+1; i++)
     {
-      counters->bytes_counter++;
       current_char = str_to_read[i];
+      if(opts_selected->bytes_opt_selected)
+      {
+        if(current_char >= -128 && current_char <= 127)
+          counters->bytes_counter += 1;
+        else
+          counters->bytes_counter += 2;
+      }
     if(!word_flag && opts_selected->words_opt_selected)
     {
       word_flag = true;
