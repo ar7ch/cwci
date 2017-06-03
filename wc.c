@@ -20,7 +20,7 @@ along with cwci. If not, see <http://www.gnu.org/licenses/>.*/
 #include "libwc.h"
 
 const char * EXEC_NAME;
-int main(int argc, char *argv[]) //TODO: resolve stdin text size detection
+int main(int argc, char *argv[]) 
 {
   setlocale(LC_ALL, "");
   EXEC_NAME = argv[0];
