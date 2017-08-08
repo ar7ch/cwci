@@ -19,8 +19,6 @@ typedef unsigned long u_long;
 #define true 1
 #define false 0
 
-//extern unsigned long words_counter, bytes_counter, chars_counter, spaces_counter, digit_counter, lines_counter, max_line_length;
-//extern bool max_line_len_selected, standard_input_selected, english_selected, words_opt_selected, bytes_opt_selected, chars_opt_selected, spaces_opt_selected, help_opt_selected, greeting_opt_selected, digit_opt_selected, lines_opt_selected;
 extern const char * EXEC_NAME;
 
 typedef struct

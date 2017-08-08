@@ -13,7 +13,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with cwci.  If not, see <http://www.gnu.org/licenses/>.*/
 
-#include "libwc.h"
+#include <cwci.h>
 #include <stdio.h>
 #include <locale.h>
 
@@ -26,20 +26,20 @@ void output_results(char *argc)
     else
       printf("Successful\n\n");
     if(opts_selected->bytes_opt_selected)
-      printf("Bytes: %d\n", counters->bytes_counter);
+      printf("Bytes: %ld\n", counters->bytes_counter);
     if(opts_selected->lines_opt_selected)
-      printf("Lines: %d\n", counters->lines_counter);
+      printf("Lines: %ld\n", counters->lines_counter);
     if(opts_selected->max_line_len_selected)
-      printf("Maximum line length: %d\n", counters->max_line_length);
+      printf("Maximum line length: %ld\n", counters->max_line_length);
     if(opts_selected->spaces_opt_selected)
-      printf("Spaces: %d\n", counters->spaces_counter);
+      printf("Spaces: %ld\n", counters->spaces_counter);
     if(opts_selected->chars_opt_selected)
-      printf("Characters: %d\n", counters->chars_counter);
+      printf("Characters: %ld\n", counters->chars_counter);
     if(opts_selected->digit_opt_selected)
-      printf("Digits: %d\n", counters->digit_counter);
+      printf("Digits: %ld\n", counters->digit_counter);
     if(opts_selected->words_opt_selected)
     {
-      printf("Words: %d\n", counters->words_counter);
+      printf("Words: %ld\n", counters->words_counter);
     }
     printf("\n");
   }
@@ -50,20 +50,20 @@ void output_results(char *argc)
     else
       printf("Успешно\n\n");
     if(opts_selected->bytes_opt_selected)
-      printf("Байтов: %d\n", counters->bytes_counter);
+      printf("Байтов: %ld\n", counters->bytes_counter);
     if(opts_selected->lines_opt_selected)
-      printf("Строк: %d\n", counters->lines_counter);
+      printf("Строк: %ld\n", counters->lines_counter);
     if(opts_selected->max_line_len_selected)
-      printf("Максимальная длина строки: %d\n", counters->max_line_length);
+      printf("Максимальная длина строки: %ld\n", counters->max_line_length);
     if(opts_selected->spaces_opt_selected)
-      printf("Пробелов: %d\n", counters->spaces_counter);
+      printf("Пробелов: %ld\n", counters->spaces_counter);
     if(opts_selected->chars_opt_selected)
-      printf("Символов: %d\n", counters->chars_counter);
+      printf("Символов: %ld\n", counters->chars_counter);
     if(opts_selected->digit_opt_selected)
-      printf("Цифр: %d\n", counters->digit_counter);
+      printf("Цифр: %ld\n", counters->digit_counter);
     if(opts_selected->words_opt_selected)
     {
-      printf("Слов: %d\n", counters->words_counter);
+      printf("Слов: %ld\n", counters->words_counter);
     }
     printf("\n");
   }

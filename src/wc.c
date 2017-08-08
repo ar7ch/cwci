@@ -11,26 +11,29 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with Cwci.  If not, see <http://www.gnu.org/licenses/>.*/
+along with cwci. If not, see <http://www.gnu.org/licenses/>.*/
 
-#include "libwc.h"
+#include <unistd.h>
 #include <stdio.h>
-#include <string.h>
-#include <ctype.h>
+#include <stdlib.h>
 #include <locale.h>
+#include <cwci.h>
 
-void setup_locale()
+const char * EXEC_NAME;
+int main(int argc, char *argv[]) 
 {
-  char locale[3];
-  select:
-  printf("Select language/Выберите язык [en/ru]: ");
-  scanf("%2s", locale);
-  locale[0] = tolower(locale[0]);
-  locale[1] = tolower(locale[1]);
-  if(!strcmp(locale, "ru"))
-    opts_selected->english_selected = false;
-  else if(!strcmp(locale, "en"))
-    opts_selected->english_selected = true;
-  else
-    goto select;
+  setlocale(LC_ALL, "");
+  EXEC_NAME = argv[0];
+  initialize_structs(1);
+  setup_locale();
+  initialize_parameters(&argc, &argv);
+  for(int i = 0; i < argc; i++)
+  {
+  wc_engine(argc, argv[i]);
+  output_results(argv[i]);
+  initialize_structs(0);
+  }
+  free(opts_selected);
+  free(counters);
+  return 0;
 }
