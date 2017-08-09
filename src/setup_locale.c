@@ -22,15 +22,23 @@ along with Cwci.  If not, see <http://www.gnu.org/licenses/>.*/
 void setup_locale()
 {
   char locale[3];
-  select:
+  while(1)
+  {
   printf("Select language/Выберите язык [en/ru]: ");
   scanf("%2s", locale);
   locale[0] = tolower(locale[0]);
   locale[1] = tolower(locale[1]);
   if(!strcmp(locale, "ru"))
+  {
     opts_selected->english_selected = false;
+    break;
+  }
   else if(!strcmp(locale, "en"))
+  { 
     opts_selected->english_selected = true;
+    break;
+  }
   else
-    goto select;
+    continue;
+  }
 }

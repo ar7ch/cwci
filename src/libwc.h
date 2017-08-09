@@ -18,7 +18,6 @@ typedef unsigned long u_long;
 
 #define true 1
 #define false 0
-
 extern const char * EXEC_NAME;
 
 typedef struct

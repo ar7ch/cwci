@@ -18,6 +18,8 @@ along with cwci.  If not, see <http://www.gnu.org/licenses/>.*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
+#include <errno.h>
+#include <string.h>
 
 void initialize_parameters(int *argc, char **argv[])
 {
@@ -56,11 +58,7 @@ void initialize_parameters(int *argc, char **argv[])
         opts_selected->greeting_opt_selected = true;
         break;
       default:
-        if(opts_selected->english_selected)
-          fprintf(stderr, "«%s -h» for help\n", EXEC_NAME);
-        else
-          fprintf(stderr, "«%s -h» для вывода справки\n", EXEC_NAME);
-        exit(1);
+        exit(EINVAL); //no need for strerror(), getopt() will output the error
     }
   }
     *argc -= optind;
@@ -78,11 +76,6 @@ void initialize_parameters(int *argc, char **argv[])
     }
     if(*argc == 0)
     {
-      if(opts_selected->help_opt_selected)
-      {
-        print_help();
-        exit(0);
-      }
       if(opts_selected->english_selected)
         fprintf(stderr,"%s: expected filename, quoutes-delimited character sequence or full path to file\n«%s -h» for help\n", EXEC_NAME, EXEC_NAME);
       else

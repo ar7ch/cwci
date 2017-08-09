@@ -23,6 +23,7 @@ along with cwci.  If not, see <http://www.gnu.org/licenses/>.*/
 #include <wchar.h>
 #include <locale.h>
 #include <sys/stat.h>
+#include <errno.h>
 
 void wc_engine(int argc, char *argv)
 {
@@ -36,11 +37,8 @@ void wc_engine(int argc, char *argv)
     {
       if(!(file_to_read = fopen(argv, "r")))
       {
-        if(opts_selected->english_selected)
-          fprintf(stderr, "%s: no such file \"%s\"\n", EXEC_NAME, argv);
-        else
-          fprintf(stderr, "%s: нет такого файла \"%s\"\n", EXEC_NAME, argv);
-        exit(3);
+        fprintf(stderr, "%s: %s: %s\n", EXEC_NAME, argv, strerror(ENOENT));
+        exit(ENOENT);
       }
     }
   if(opts_selected->bytes_opt_selected && !opts_selected->standard_input_selected)
