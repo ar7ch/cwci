@@ -37,4 +37,4 @@ libcwci.so: $(OBJECTS)
 	export LD_LIBRARY_PATH=$(DIR) ; gcc -shared -Wall $(OBJECTS) -o libcwci.so
 cwci: cwci.o libcwci.so
 	gcc cwci.o -L\$(DIR) -lcwci -o cwci
-	rm $(OBJECTS)
+	rm $(OBJECTS) cwci.o
