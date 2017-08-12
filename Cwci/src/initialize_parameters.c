@@ -49,7 +49,7 @@ void initialize_parameters(int *argc, char **argv[])
         opts_selected->digit_opt_selected = true;
         break;
       case 'h':
-        opts_selected->help_opt_selected = true;
+        print_help();
         break;
       case 'l':
         opts_selected->lines_opt_selected = true;
@@ -74,7 +74,7 @@ void initialize_parameters(int *argc, char **argv[])
         fprintf(stderr, "%s: на вход ожидались аргументы\n«%s -h» для вывода справки\n", EXEC_NAME, EXEC_NAME);
       exit(2);
     }
-    if(*argc == 0)
+    if(*argc == 0 && !opts_selected->help_opt_selected)
     {
       if(opts_selected->english_selected)
         fprintf(stderr,"%s: expected filename, quoutes-delimited character sequence or full path to file\n«%s -h» for help\n", EXEC_NAME, EXEC_NAME);

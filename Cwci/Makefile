@@ -16,7 +16,13 @@
 OBJECTS = greeting.o setup_locale.o print_help.o initialize_structs.o initialize_parameters.o output_results.o wc_engine.o
 SRC_DIR = ${CURDIR}/src
 DIR = ${CURDIR}
-
+.PHONY: clean rebuild
+clean:
+	rm -f *.o
+rebuild:
+	rm -f *.o *.a *.so
+#to keep it simple we'll have to use -fPIC flag even for static lib
+#it's okay, but it will be slighty slower
 greeting.o: $(SRC_DIR)/greeting.c $(SRC_DIR)/cwci.h
 	gcc -I\$(SRC_DIR) -Wall -c -fPIC $(SRC_DIR)/greeting.c -o greeting.o
 setup_locale.o: $(SRC_DIR)/setup_locale.c $(SRC_DIR)/cwci.h
@@ -35,6 +41,9 @@ cwci.o: $(SRC_DIR)/cwci.c $(SRC_DIR)/cwci.h
 	gcc -I\$(SRC_DIR) -Wall -c $(SRC_DIR)/cwci.c -o cwci.o
 libcwci.so: $(OBJECTS)
 	export LD_LIBRARY_PATH=$(DIR) ; gcc -shared -Wall $(OBJECTS) -o libcwci.so
-cwci: cwci.o libcwci.so
+libcwci.a: $(OBJECTS)
+	ar -rcs libcwci.a $(OBJECTS)
+cwci_static: cwci.o libcwci.a
 	gcc cwci.o -L\$(DIR) -lcwci -o cwci
-	rm $(OBJECTS) cwci.o
+cwci_dynamic: cwci.o libcwci.so
+	gcc cwci.o -L\$(DIR) -lcwci -o cwci
