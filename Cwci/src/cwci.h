@@ -49,10 +49,10 @@ typedef struct
 
 extern wc_opts_selected  * opts_selected;
 extern wc_counters * counters;
-void greeting();
-void initialize_structs(int flag);
-void initialize_parameters(int *argc, char **argv[]);
-void wc_engine(int argc, char *argv);
-void output_results(char *argv);
-void setup_locale();
-void print_help();
+void error (char * error_msg, char * error_object);
+void initialize_structs (int flag);
+void initialize_parameters (int *argc, char **argv[]);
+void wc_engine (int argc, char *argv);
+void output_results (char *argv);
+void setup_locale ();
+void print_help ();

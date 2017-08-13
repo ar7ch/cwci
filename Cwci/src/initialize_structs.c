@@ -21,31 +21,29 @@ wc_opts_selected  * opts_selected;
 
 void initialize_structs(int flag)
 {
-if(flag == 1)
-{
-opts_selected = malloc(sizeof(wc_counters));
-counters = malloc(sizeof(wc_counters));
-}
-
-if(flag == 1) //assign ops_selected fields to false only once
-{
-opts_selected->max_line_len_selected = false;
-opts_selected->english_selected = false;
-opts_selected->words_opt_selected = false;
-opts_selected->bytes_opt_selected = false;
-opts_selected->chars_opt_selected = false;
-opts_selected->spaces_opt_selected = false;
-opts_selected->help_opt_selected = false;
-opts_selected->greeting_opt_selected = false;
-opts_selected->digit_opt_selected = false;
-opts_selected->lines_opt_selected = false;
-opts_selected->standard_input_selected = false;
-}
-counters->words_counter = 0;
-counters->bytes_counter = 0;
-counters->chars_counter = 0;
-counters->spaces_counter = 0;
-counters->digit_counter = 0;
-counters->lines_counter = 0;
-counters->max_line_length = 0;
+/* assign ops_selected fields to false only once
+to avoid fields reset while parsing multiply files */
+	if(flag == 1)
+	{
+		opts_selected = malloc(sizeof(wc_counters));
+		counters = malloc(sizeof(wc_counters));
+		opts_selected->max_line_len_selected = false;
+		opts_selected->english_selected = false;
+		opts_selected->words_opt_selected = false;
+		opts_selected->bytes_opt_selected = false;
+		opts_selected->chars_opt_selected = false;
+		opts_selected->spaces_opt_selected = false;
+		opts_selected->help_opt_selected = false;
+		opts_selected->greeting_opt_selected = false;
+		opts_selected->digit_opt_selected = false;
+		opts_selected->lines_opt_selected = false;
+		opts_selected->standard_input_selected = false;
+	}
+	counters->words_counter = 0;
+	counters->bytes_counter = 0;
+	counters->chars_counter = 0;
+	counters->spaces_counter = 0;
+	counters->digit_counter = 0;
+	counters->lines_counter = 0;
+	counters->max_line_length = 0;
 }

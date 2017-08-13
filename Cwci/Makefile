@@ -13,7 +13,7 @@
 #You should have received a copy of the GNU General Public License
 #along with cwci.  If not, see <http://www.gnu.org/licenses/>.
 
-OBJECTS = greeting.o setup_locale.o print_help.o initialize_structs.o initialize_parameters.o output_results.o wc_engine.o
+OBJECTS = error.o setup_locale.o print_help.o initialize_structs.o initialize_parameters.o output_results.o wc_engine.o
 SRC_DIR = ${CURDIR}/src
 DIR = ${CURDIR}
 .PHONY: clean rebuild
@@ -23,8 +23,8 @@ rebuild:
 	rm -f *.o *.a *.so
 #to keep it simple we'll have to use -fPIC flag even for static lib
 #it's okay, but it will be slighty slower
-greeting.o: $(SRC_DIR)/greeting.c $(SRC_DIR)/cwci.h
-	gcc -I\$(SRC_DIR) -Wall -c -fPIC $(SRC_DIR)/greeting.c -o greeting.o
+error.o: $(SRC_DIR)/error.c $(SRC_DIR)/cwci.h
+	gcc -I\$(SRC_DIR) -Wall -c -fPIC $(SRC_DIR)/error.c -o error.o 
 setup_locale.o: $(SRC_DIR)/setup_locale.c $(SRC_DIR)/cwci.h
 	gcc -I\$(SRC_DIR) -Wall -c -fPIC $(SRC_DIR)/setup_locale.c -o setup_locale.o
 print_help.o: $(SRC_DIR)/print_help.c $(SRC_DIR)/cwci.h

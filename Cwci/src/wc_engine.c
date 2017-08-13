@@ -19,8 +19,6 @@ along with cwci.  If not, see <http://www.gnu.org/licenses/>.*/
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include <wctype.h>
-#include <wchar.h>
 #include <locale.h>
 #include <sys/stat.h>
 #include <errno.h>
@@ -34,13 +32,8 @@ void wc_engine(int argc, char *argv)
   int ch;
     FILE *file_to_read;
     if(!opts_selected->standard_input_selected)
-    {
       if(!(file_to_read = fopen(argv, "r")))
-      {
-        fprintf(stderr, "%s: %s: %s\n", EXEC_NAME, argv, strerror(ENOENT));
-        exit(ENOENT);
-      }
-    }
+        error(strerror(ENOENT), argv);
   if(opts_selected->bytes_opt_selected && !opts_selected->standard_input_selected)
   {
     struct stat buff;
@@ -51,16 +44,11 @@ void wc_engine(int argc, char *argv)
   /*for(int i = 0; i < argc; i++){
     char ch[] = argv[i];
     for(int j = 0; ch[j] != '\0'; i++)  }*/
-  if(opts_selected->greeting_opt_selected)
-    greeting();
-  if(opts_selected->help_opt_selected)
-    print_help();
   if(!opts_selected->standard_input_selected)
   {
   while((ch = fgetc(file_to_read)) != EOF)
   {
     current_char = ch;
-
     if(!word_flag && opts_selected->words_opt_selected)
     {
       word_flag = true;
